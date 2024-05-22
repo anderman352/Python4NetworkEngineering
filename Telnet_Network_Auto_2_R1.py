@@ -6,7 +6,7 @@ Created on Sun May 12 13:43:39 2024
 """
 
 import getpass
-port telnetlib
+import telnetlib
 
 HOST = "192.168.122.71"
 user = input("Enter your telnet username: ")
