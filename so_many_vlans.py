@@ -1,16 +1,14 @@
 # -*- coding: utf-8 -*-
 """
-Created on Sun May 12 13:43:39 2024
+Created on Mon May 27 18:19:37 2024
 
 @author: david
 """
 
-# telnet into switch, set loopn ip addres and mask
-
 import getpass
 import telnetlib
 
-HOST = "192.168.122.71"
+HOST = "192.168.122.72"
 user = input("Enter your telnet username: ")
 password = getpass.getpass()
 
@@ -24,17 +22,13 @@ if password:
 
 tn.write(b"enable\n")
 tn.write(b"cisco\n")
-
 tn.write(b"conf t\n")
 
-tn.write(b"int loop 0\n")
-tn.write(b"ip address 1.1.1.1 255.255.255.255\n")
+for n in range (2, 110):
+        tn.write(b"vlan " + str(n).encode('ascii') + b"\n")
+        tn.write(b"name Python_VLAN_" + str(n).encode('ascii') + b"\n")
 
-tn.write(b"int loop 1\n")
-tn.write(b"ip address 2.2.2.2 255.255.255.255\n")
+tn.write(b"end\n")
+tn.write(b"exit\n")
 
-tn.write(b"router ospf 1\n")
-tn.write(b"network 0.0.0.0 255.255.255.255 area 0\n")
-
-
-
+print(tn.read_all().decode('ascii'))
