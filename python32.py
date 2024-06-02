@@ -1,11 +1,11 @@
 import getpass
 import telnetlib
 
-HOST = "192.168.122.72"
+HOST = "localhost"
 user = input("Enter your telnet username: ")
 password = getpass.getpass()
 
-tn = telnetlib.Telnet(HOST)
+f = open('myswitches')
 
 tn.read_until(b"Username: ")
 tn.write(user.encode('ascii') + b"\n")
